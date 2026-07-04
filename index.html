@@ -1,253 +1,259 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" x-data="appData()">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO METADATA -->
-    <title>Travel Umroh Terpercaya 2026 | Izin Resmi Kemenag RI</title>
-    <meta name="description" content="Agen travel umroh dan haji plus terpercaya di Indonesia. Paket umroh murah, hotel dekat masjid, bimbingan sesuai sunnah, dan kepastian keberangkatan.">
-    <meta name="keywords" content="travel umroh, paket umroh 2026, umroh ramadhan, haji plus, umroh resmi kemenag">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://domain-anda.com/">
+    <!-- SEO METADATA DINAMIS (Dikelola via AlpineJS) -->
+    <title x-text="seo.title">Travel Umroh & Blog Terpercaya 2026</title>
+    <meta name="description" :content="seo.description">
+    <meta name="keywords" :content="seo.keywords">
+    <link rel="canonical" :href="seo.url">
 
-    <!-- OPEN GRAPH (Untuk Share ke WA / FB agar Muncul Gambar & Teks Bagus) -->
+    <!-- OPEN GRAPH (Sosial Media) -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Paket Umroh Amanah & Sesuai Sunnah - Al-Mubarak Travel">
-    <meta property="og:description" content="Daftar paket umroh reguler & VIP 2026. Fasilitas hotel bintang 5 dekat masjid. Hubungi kami sekarang!">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?q=80&w=600">
-    <meta property="og:url" content="https://domain-anda.com/">
+    <meta property="og:title" :content="seo.title">
+    <meta property="og:description" :content="seo.description">
+    <meta property="og:url" :content="seo.url">
 
-    <!-- TAILWIND & ALPINE JS (Untuk Reactive State / Link WA Otomatis) -->
+    <!-- TAILWIND & ALPINE.JS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        html { scroll-behavior: smooth; }
-        /* Efek visual penanda bahwa teks ini bisa diedit secara lokal saat dicoba */
-        [contenteditable="true"]:hover { outline: 1px dashed #ca8a04; cursor: pointer; }
-        [contenteditable="true"]:focus { outline: 2px solid #15803d; background-color: #f0fdf4; }
-    </style>
 
-    <!-- 1. SCHEMA MARKUP: ORGANISASI & TRAVEL AGENSI (Penting untuk SEO Google) -->
-    <script type="application/ld-json">
+    <!-- SCHEMA MARKUP JSON-LD -->
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "TravelAgency",
-      "name": "Al-Mubarak Travel",
-      "image": "https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?q=80&w=600",
-      "@id": "https://domain-anda.com/#organization",
+      "@type": "NewsMediaOrganization",
+      "name": "Al-Mubarak Travel & Portal",
       "url": "https://domain-anda.com/",
-      "telephone": "+6281234567890",
-      "priceRange": "$$$",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Jl. Raya Syariah No. 45, Kebayoran Baru",
-        "addressLocality": "Jakarta Selatan",
-        "addressRegion": "DKI Jakarta",
-        "postalCode": "12110",
-        "addressCountry": "ID"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "-6.2442",
-        "longitude": "106.8006"
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ],
-        "opens": "08:00",
-        "closes": "17:00"
-      }
-    }
-    </script>
-
-    <!-- 2. SCHEMA MARKUP: FAQ (Agar Pertanyaan Muncul Langsung di Google Search) -->
-    <script type="application/ld-json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [{
-        "@type": "Question",
-        "name": "Apakah Al-Mubarak Travel memiliki izin resmi?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Ya, kami adalah travel umroh resmi berizin Kemenag RI No. 123 Tahun 2026 dengan komitmen pelayanan amanah."
-        }
-      }, {
-        "@type": "Question",
-        "name": "Fasilitas apa saja yang didapatkan jemaah?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Paket sudah termasuk tiket pesawat PP, akomodasi hotel dekat masjid, makan 3x sehari menu Indonesia, manasik, perlengkapan umroh, dan Muthawif pendamping."
-        }
-      }]
+      "logo": "https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?q=80&w=200"
     }
     </script>
 </head>
-<!-- Inisialisasi data WhatsApp global menggunakan Alpine.js agar mudah diganti di satu tempat -->
-<body class="bg-gray-50 text-gray-800 font-sans" x-data="{ waNumber: '6281234567890', waText: 'Assalamualaikum, saya ingin tanya paket umroh' }">
-
-    <!-- TOP BAR -->
-    <div class="bg-green-700 text-white text-xs md:text-sm py-2 px-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <div contenteditable="true"><i class="fas fa-check-circle mr-1"></i> Izin Resmi Kemenag RI No. 123/2026</div>
-            <div class="hidden md:flex space-x-4">
-                <span contenteditable="true"><i class="fas fa-phone mr-1"></i> 0812-3456-7890</span>
-                <span contenteditable="true"><i class="fas fa-envelope mr-1"></i> info@travelumroh.com</span>
-            </div>
-        </div>
-    </div>
+<body class="bg-gray-50 text-gray-800 font-sans" @keydown.window="handleShortcut($event)">
 
     <!-- NAVBAR -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
+    <nav class="bg-green-700 text-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-green-700 tracking-wide" contenteditable="true">
-                <i class="fas fa-kaaba mr-2"></i>AL-MUBARAK <span class="text-amber-600">TRAVEL</span>
+            <div class="text-xl font-bold tracking-wide cursor-pointer" @click="currentView = 'home'">
+                <i class="fas fa-kaaba mr-2"></i>AL-MUBARAK <span class="text-amber-400">MEDIA</span>
             </div>
-            <div class="hidden md:flex space-x-6 font-medium text-gray-600">
-                <a href="#home" class="hover:text-green-700 transition">Home</a>
-                <a href="#keunggulan" class="hover:text-green-700 transition">Mengapa Kami</a>
-                <a href="#paket" class="hover:text-green-700 transition">Paket Umroh</a>
-                <a href="#faq" class="hover:text-green-700 transition">FAQ</a>
+            <div class="flex space-x-4 font-medium text-sm">
+                <button @click="currentView = 'home'" class="hover:text-amber-300 transition">Home</button>
+                <button @click="currentView = 'blog'" class="hover:text-amber-300 transition">Artikel/Blog</button>
+                <button @click="isAdmin = !isAdmin" class="bg-amber-500 text-gray-900 px-3 py-1 rounded hover:bg-amber-600 font-bold transition">
+                    <i class="fas fa-user-lock mr-1"></i> <span x-text="isAdmin ? 'Tutup Admin' : 'Admin Panel'"></span>
+                </button>
             </div>
-            <!-- Klik tombol ini akan otomatis menggunakan data nomor WA diatas -->
-            <a :href="'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waText)" target="_blank" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2 rounded-full font-semibold transition shadow-md flex items-center">
-                <i class="fab fa-whatsapp mr-2 text-lg"></i> <span contenteditable="true">Konsultasi Gratis</span>
-            </a>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <section id="home" class="relative bg-cover bg-center h-[550px] flex items-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?auto=format&fit=crop&q=80&w=1200');">
-        <div class="container mx-auto px-4 text-center text-white">
-            <span class="bg-amber-600 text-xs uppercase font-bold px-4 py-1.5 rounded-full tracking-wider mb-4 inline-block" contenteditable="true">Wujudkan Umroh Pengalaman Terbaik Anda</span>
-            <h1 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight" contenteditable="true">Perjalanan Umroh Aman, Nyaman,<br>& Sesuai Sunnah</h1>
-            <p class="text-base md:text-xl mb-8 max-w-2xl mx-auto text-gray-200" contenteditable="true">Bimbingan intensif sebelum keberangkatan hingga kembali ke tanah air. Hotel dekat masjid dan fasilitas premium.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#paket" class="bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-3.5 rounded-lg shadow-lg transition text-center">Pilihan Paket</a>
-                <a :href="'https://wa.me/' + waNumber" class="bg-white hover:bg-gray-100 text-gray-900 font-bold px-8 py-3.5 rounded-lg shadow-lg transition text-center flex items-center justify-center">
-                    <i class="fab fa-whatsapp text-green-600 mr-2 text-xl"></i> <span contenteditable="true">Hubungi Chat WhatsApp</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- SETTING PANEL (Hanya terlihat oleh Anda saat mengedit kode secara lokal) -->
-    <div class="bg-amber-50 border-y border-amber-200 py-3 px-4 text-sm text-center">
-        <div class="container mx-auto max-w-xl flex flex-wrap items-center justify-center gap-2">
-            <span class="font-bold text-amber-800"><i class="fas fa-cog mr-1"></i> Pengaturan Link WhatsApp Cepat:</span>
-            <input type="text" x-model="waNumber" class="border border-amber-300 rounded px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" placeholder="Contoh: 6281234567890">
-        </div>
-    </div>
-
-    <!-- PAKET UMROH SECTION (Dengan Skema Penawaran Produk) -->
-    <section id="paket" class="py-16 bg-gray-100">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2" contenteditable="true">Pilihan Paket Umroh Terbaik 2026</h2>
-                <p class="text-gray-500" contenteditable="true">Harga transparan, fasilitas jelas, tanpa biaya tersembunyi.</p>
+    <!-- CONTAINER UTAMA -->
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+        
+        <!-- ================= PANEL ADMIN (EDITABLE & UPLOAD) ================= -->
+        <section x-show="isAdmin" class="bg-white border-2 border-amber-500 rounded-xl p-6 mb-10 shadow-lg" x-transition>
+            <div class="flex justify-between items-center border-b pb-3 mb-6">
+                <h2 class="text-xl font-bold text-amber-700"><i class="fas fa-tools mr-2"></i>DASHBOARD ADMIN & SEO</h2>
+                <span class="text-xs text-gray-400">Tips: Tekan Ctrl+Shift+A untuk sembunyikan/buka</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <!-- Paket 1 (Reguler) -->
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                    <div class="bg-green-700 p-6 text-white text-center">
-                        <h3 class="text-xl font-bold uppercase tracking-wider" contenteditable="true">Paket Reguler</h3>
-                        <p class="text-xs text-green-200 mt-1" contenteditable="true">Durasi 9 Hari Perjalanan</p>
-                        <div class="mt-4 text-3xl font-extrabold text-yellow-400" contenteditable="true">Rp 29.5 Jt</div>
-                        <!-- Meta data tersembunyi agar bot Google membaca harga valid mata uang rupiah -->
-                        <meta itemprop="price" content="29500000">
-                        <meta itemprop="priceCurrency" content="IDR">
+            <!-- Pengaturan Global SEO Website -->
+            <div class="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-200">
+                <h3 class="font-bold text-gray-700 mb-3"><i class="fas fa-search-plus mr-1"></i> Pengaturan Global SEO Web</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 mb-1">Meta Title Utama</label>
+                        <input type="text" x-model="seo.title" class="w-full border p-2 rounded text-sm focus:ring-1 focus:ring-green-500">
                     </div>
-                    <div class="p-6 space-y-4">
-                        <ul class="space-y-3 text-sm text-gray-600" contenteditable="true">
-                            <li><i class="fas fa-check text-green-600 mr-2"></i> Pesawat Saudia Direct</li>
-                            <li><i class="fas fa-check text-green-600 mr-2"></i> Hotel Makkah Bintang 3</li>
-                            <li><i class="fas fa-check text-green-600 mr-2"></i> Hotel Madinah Bintang 3</li>
-                            <li><i class="fas fa-check text-green-600 mr-2"></i> Free Manasik & Perlengkapan</li>
-                        </ul>
-                        <hr class="border-gray-100">
-                        <a :href="'https://wa.me/' + waNumber + '?text=Saya%20tertarik%20Paket%20Reguler'" class="block text-center bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition">Ambil Slot Sekarang</a>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 mb-1">Keywords (Pisahkan dengan koma)</label>
+                        <input type="text" x-model="seo.keywords" class="w-full border p-2 rounded text-sm">
                     </div>
-                </div>
-
-                <!-- Paket 2 (VIP) -->
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-amber-500 relative" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                    <div class="bg-gray-900 p-6 text-white text-center">
-                        <h3 class="text-xl font-bold uppercase tracking-wider text-yellow-400" contenteditable="true">Paket VIP Bintang 5</h3>
-                        <p class="text-xs text-gray-400 mt-1" contenteditable="true">Durasi 9 Hari Premium</p>
-                        <div class="mt-4 text-3xl font-extrabold text-yellow-400" contenteditable="true">Rp 37.0 Jt</div>
-                        <meta itemprop="price" content="37000000">
-                        <meta itemprop="priceCurrency" content="IDR">
-                    </div>
-                    <div class="p-6 space-y-4">
-                        <ul class="space-y-3 text-sm text-gray-600" contenteditable="true">
-                            <li><i class="fas fa-check text-amber-500 mr-2"></i> Pesawat Premium / Emirates</li>
-                            <li><i class="fas fa-check text-amber-500 mr-2"></i> Hotel Makkah Bintang 5 (Pullman)</li>
-                            <li><i class="fas fa-check text-amber-500 mr-2"></i> Hotel Madinah Bintang 5 (Al-Aqeeq)</li>
-                            <li><i class="fas fa-check text-amber-500 mr-2"></i> Kereta Cepat Haramain Termasuk</li>
-                        </ul>
-                        <hr class="border-gray-100">
-                        <a :href="'https://wa.me/' + waNumber + '?text=Saya%20tertarik%20Paket%20VIP'" class="block text-center bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-xl transition shadow">Ambil Slot Premium</a>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-bold text-gray-600 mb-1">Meta Description</label>
+                        <textarea x-model="seo.description" rows="2" class="w-full border p-2 rounded text-sm"></textarea>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- FAQ SECTION (Sangat disukai Google untuk menaikkan peringkat Search) -->
-    <section id="faq" class="py-16 bg-white">
-        <div class="container mx-auto px-4 max-w-3xl">
-            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-8" contenteditable="true">Pertanyaan Yang Sering Diajukan (FAQ)</h2>
-            <div class="space-y-6">
-                <div class="border-b border-gray-200 pb-4">
-                    <h3 class="font-bold text-lg text-green-700 mb-2" contenteditable="true">Apakah Al-Mubarak Travel memiliki izin resmi?</h3>
-                    <p class="text-gray-600 text-sm" contenteditable="true">Ya, kami adalah travel umroh resmi berizin Kemenag RI No. 123 Tahun 2026 dengan komitmen pelayanan amanah.</p>
+            <!-- Form Tambah Artikel -->
+            <form @submit.prevent="saveArticle()" class="space-y-4">
+                <h3 class="font-bold text-gray-700"><i class="fas fa-pen-nib mr-1"></i> Tulis Artikel & Upload Gambar</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 mb-1">Judul Artikel</label>
+                        <input type="text" x-model="newArticle.title" required class="w-full border p-2 rounded text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 mb-1">Upload Foto Berita/Artikel</label>
+                        <input type="file" @change="uploadImage($event)" accept="image/*" class="w-full border p-1 rounded text-sm bg-white">
+                    </div>
                 </div>
-                <div class="border-b border-gray-200 pb-4">
-                    <h3 class="font-bold text-lg text-green-700 mb-2" contenteditable="true">Fasilitas apa saja yang didapatkan jemaah?</h3>
-                    <p class="text-gray-600 text-sm" contenteditable="true">Paket sudah termasuk tiket pesawat PP, akomodasi hotel dekat masjid, makan 3x sehari menu Indonesia, manasik, perlengkapan umroh, dan Muthawif pendamping.</p>
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-1">Isi Artikel / Berita</label>
+                    <textarea x-model="newArticle.content" rows="6" required class="w-full border p-2 rounded text-sm" placeholder="Tulis berita lengkap di sini..."></textarea>
                 </div>
+                <button type="submit" class="bg-green-700 hover:bg-green-800 text-white font-bold px-6 py-2 rounded shadow transition">
+                    <i class="fas fa-cloud-upload-alt mr-2"></i>Terbitkan Artikel
+                </button>
+            </form>
+        </section>
+
+        <!-- ================= VIEW 1: HOME PAGE ================= -->
+        <div x-show="currentView === 'home'" x-transition>
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-r from-green-800 to-emerald-600 rounded-2xl p-8 md:p-12 text-white text-center shadow-md mb-12">
+                <h1 class="text-3xl md:text-5xl font-extrabold mb-4" x-text="seo.title"></h1>
+                <p class="text-base md:text-lg text-green-100 max-w-2xl mx-auto mb-6" x-text="seo.description"></p>
+                <button @click="currentView = 'blog'" class="bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold px-6 py-3 rounded-xl transition shadow">
+                    Baca Berita & Manfaat Umroh <i class="fas fa-arrow-right ml-1"></i>
+                </button>
             </div>
         </div>
-    </section>
+
+        <!-- ================= VIEW 2: BLOG & ARTIKEL LIST ================= -->
+        <div x-show="currentView === 'blog'" x-transition>
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-gray-900">Pusat Informasi & Edukasi Umroh</h2>
+                <p class="text-gray-500 mt-2">Artikel terbaru seputar ibadah haji, umroh, dan tips tanah suci.</p>
+            </div>
+
+            <!-- Grid Artikel -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <template x-for="(article, index) in articles" :key="index">
+                    <article class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col justify-between hover:shadow-md transition">
+                        <div>
+                            <img :src="article.image || 'https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?q=80&w=400'" :alt="article.title" class="w-full h-48 object-cover">
+                            <div class="p-5">
+                                <span class="text-xs text-green-700 font-bold uppercase tracking-wider block mb-2" x-text="article.date"></span>
+                                <h3 class="font-bold text-xl text-gray-950 mb-3 line-clamp-2" x-text="article.title"></h3>
+                                <p class="text-gray-600 text-sm line-clamp-3" x-text="article.content"></p>
+                            </div>
+                        </div>
+                        <div class="p-5 pt-0 flex justify-between items-center">
+                            <button @click="readSingle(article)" class="text-green-700 font-bold text-sm hover:underline">Baca Selengkapnya &rarr;</button>
+                            <button x-show="isAdmin" @click="deleteArticle(index)" class="text-red-500 hover:text-red-700 text-sm"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </article>
+                </template>
+            </div>
+        </div>
+
+        <!-- ================= VIEW 3: SINGLE ARTIKEL VIEW (SEO OPTIMIZED) ================= -->
+        <div x-show="currentView === 'single'" x-transition class="max-w-3xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow-sm border">
+            <button @click="currentView = 'blog'" class="text-sm font-semibold text-gray-500 hover:text-green-700 mb-6 block">
+                <i class="fas fa-chevron-left mr-1"></i> Kembali ke Blog
+            </button>
+            
+            <header class="mb-6">
+                <span class="text-xs text-green-700 font-bold uppercase tracking-wider" x-text="singleArticle.date"></span>
+                <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-4 leading-tight" x-text="singleArticle.title"></h1>
+            </header>
+
+            <img :src="singleArticle.image || 'https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?q=80&w=800'" :alt="singleArticle.title" class="w-full h-auto rounded-xl mb-8 object-cover max-h-[400px]">
+
+            <div class="prose max-w-none text-gray-700 leading-relaxed space-y-4 whitespace-pre-line" x-text="singleArticle.content"></div>
+        </div>
+
+    </main>
 
     <!-- FOOTER -->
-    <footer class="bg-gray-900 text-gray-400 py-12 text-sm">
-        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-                <h4 class="text-white font-bold text-lg mb-4" contenteditable="true"><i class="fas fa-kaaba text-green-500 mr-2"></i>AL-MUBARAK TRAVEL</h4>
-                <p class="leading-relaxed" contenteditable="true">Situs resmi penyedia layanan perjalanan ibadah Umroh dan Haji Plus dengan jaminan amanah dan kenyamanan prima bagi jemaah.</p>
-            </div>
-            <div>
-                <h4 class="text-white font-bold text-base mb-4">Legalitas Resmi</h4>
-                <p class="text-xs bg-gray-800 p-3 rounded border border-gray-700 text-gray-300" contenteditable="true">
-                    PT. Al-Mubarak Berkah Ilahi<br>
-                    SK Kemenag RI Umroh: No. 123 Tahun 2026<br>
-                    Kantor: Jl. Raya Syariah No. 45, Kebayoran Baru, Jakarta Selatan
-                </p>
-            </div>
-        </div>
-        <div class="border-t border-gray-800 mt-10 pt-6 text-center text-xs">
-            &copy; 2026 Al-Mubarak Travel. All Rights Reserved. Optimized for SEO Google.
-        </div>
+    <footer class="bg-gray-900 text-gray-400 mt-20 py-8 text-center text-xs border-t border-gray-800">
+        &copy; 2026 Al-Mubarak Portal. Manajemen Konten Mandiri Tanpa Database.
     </footer>
 
-    <!-- FIXED FLOATING WHATSAPP BUTTON -->
-    <div class="fixed bottom-5 right-5 z-50">
-        <a :href="'https://wa.me/' + waNumber" target="_blank" class="bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:bg-green-700 transition transform hover:scale-110">
-            <i class="fab fa-whatsapp text-3xl"></i>
-        </a>
-    </div>
+    <!-- LOGIK PROGRAM (ALPINE.JS & LOCALSTORAGE DATA PERSISTENCE) -->
+    <script>
+        function appData() {
+            return {
+                // State Aplikasi
+                currentView: 'home',
+                isAdmin: false,
+                
+                // SEO default
+                seo: {
+                    title: 'Situs Resmi Al-Mubarak Travel Umroh 2026',
+                    description: 'Penyedia layanan umroh dan haji plus resmi kemenag. Dapatkan informasi berita seputar mekkah dan madinah terbaru disini.',
+                    keywords: 'travel umroh, berita islam, panduan haji, umroh 2026',
+                    url: window.location.href
+                },
 
+                // List Artikel bawaan awal (jika localstorage kosong)
+                articles: JSON.parse(localStorage.getItem('my_articles')) || [
+                    {
+                        title: "Tips Persiapan Fisik Sebelum Berangkat Umroh 2026",
+                        content: "Ibadah umroh membutuhkan ketahanan fisik yang prima karena jemaah akan banyak berjalan kaki saat Thawaf dan Sai. Sangat disarankan untuk memulai olahraga ringan seperti jalan kaki 30 menit setiap hari satu bulan sebelum tanggal keberangkatan Anda.",
+                        image: "https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?q=80&w=400",
+                        date: "04 Jul 2026"
+                    }
+                ],
+
+                newArticle: { title: '', content: '', image: '' },
+                singleArticle: {},
+
+                // Fungsi Upload Gambar & Convert ke Base64 String
+                uploadImage(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            this.newArticle.image = e.target.result;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                },
+
+                // Simpan Artikel Baru ke LocalStorage browser
+                saveArticle() {
+                    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                    const today  = new Date();
+                    
+                    const articleData = {
+                        title: this.newArticle.title,
+                        content: this.newArticle.content,
+                        image: this.newArticle.image,
+                        date: today.toLocaleDateString("id-ID", options)
+                    };
+
+                    this.articles.unshift(articleData);
+                    localStorage.setItem('my_articles', JSON.stringify(this.articles));
+                    
+                    // Reset Form
+                    this.newArticle = { title: '', content: '', image: '' };
+                    alert('Artikel berhasil diterbitkan secara lokal!');
+                    this.currentView = 'blog';
+                },
+
+                // Menghapus artikel
+                deleteArticle(index) {
+                    if(confirm("Hapus artikel ini?")) {
+                        this.articles.splice(index, 1);
+                        localStorage.setItem('my_articles', JSON.stringify(this.articles));
+                    }
+                },
+
+                // Membaca artikel tunggal dan inject data SEO khusus artikel tersebut
+                readSingle(article) {
+                    this.singleArticle = article;
+                    this.currentView = 'single';
+                    
+                    // Dinamis SEO saat artikel dibuka (Sangat ramah Google bot)
+                    this.seo.title = article.title + " | Al-Mubarak Blog";
+                    this.seo.description = article.content.substring(0, 160) + "...";
+                },
+
+                // Shortcut keyboard rahasia untuk membuka menu Admin
+                handleShortcut(e) {
+                    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
+                        e.preventDefault();
+                        this.isAdmin = !this.isAdmin;
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 </html>
