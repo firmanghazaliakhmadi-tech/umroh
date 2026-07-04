@@ -1,259 +1,240 @@
 <!DOCTYPE html>
-<html lang="id" x-data="appData()">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO METADATA DINAMIS (Dikelola via AlpineJS) -->
-    <title x-text="seo.title">Travel Umroh & Blog Terpercaya 2026</title>
-    <meta name="description" :content="seo.description">
-    <meta name="keywords" :content="seo.keywords">
-    <link rel="canonical" :href="seo.url">
-
-    <!-- OPEN GRAPH (Sosial Media) -->
+    <!-- SEO Meta Tags -->
+    <title>Fasiha Mulia | Profesional Konsultan & Layanan Terbaik</title>
+    <meta name="description" content="Website resmi Fasiha Mulia. Menyediakan layanan konsultasi profesional, solusi bisnis digital, dan berbagi artikel edukatif terbaru.">
+    <meta name="keywords" content="Fasiha Mulia, konsultan bisnis, digital marketing, artikel bisnis, landing page profesional">
+    <meta name="author" content="Fasiha Mulia">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook (SEO Sosial Media) -->
     <meta property="og:type" content="website">
-    <meta property="og:title" :content="seo.title">
-    <meta property="og:description" :content="seo.description">
-    <meta property="og:url" :content="seo.url">
+    <meta property="og:url" content="https://fasihamulia.com/">
+    <meta property="og:title" content="Fasiha Mulia | Profesional Konsultan & Layanan Terbaik">
+    <meta property="og:description" content="Menyediakan layanan konsultasi profesional dan solusi bisnis digital terbaik untuk Anda.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=500">
 
-    <!-- TAILWIND & ALPINE.JS -->
+    <!-- Tailwind CSS (Untuk Desain Modern & Cepat) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- FontAwesome untuk Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- SCHEMA MARKUP JSON-LD -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "NewsMediaOrganization",
-      "name": "Al-Mubarak Travel & Portal",
-      "url": "https://domain-anda.com/",
-      "logo": "https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?q=80&w=200"
-    }
-    </script>
+    
+    <style>
+        html { scroll-behavior: smooth; }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans" @keydown.window="handleShortcut($event)">
+<body class="bg-gray-50 text-gray-800 font-sans">
 
-    <!-- NAVBAR -->
-    <nav class="bg-green-700 text-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-xl font-bold tracking-wide cursor-pointer" @click="currentView = 'home'">
-                <i class="fas fa-kaaba mr-2"></i>AL-MUBARAK <span class="text-amber-400">MEDIA</span>
-            </div>
-            <div class="flex space-x-4 font-medium text-sm">
-                <button @click="currentView = 'home'" class="hover:text-amber-300 transition">Home</button>
-                <button @click="currentView = 'blog'" class="hover:text-amber-300 transition">Artikel/Blog</button>
-                <button @click="isAdmin = !isAdmin" class="bg-amber-500 text-gray-900 px-3 py-1 rounded hover:bg-amber-600 font-bold transition">
-                    <i class="fas fa-user-lock mr-1"></i> <span x-text="isAdmin ? 'Tutup Admin' : 'Admin Panel'"></span>
-                </button>
-            </div>
+    <!-- HEADER & NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-blue-600 tracking-wide">FASIHA MULIA</a>
+            <nav class="hidden md:flex space-x-8 font-medium">
+                <a href="#home" class="text-gray-600 hover:text-blue-600 transition">Home</a>
+                <a href="#tentang" class="text-gray-600 hover:text-blue-600 transition">Tentang Kami</a>
+                <a href="#layanan" class="text-gray-600 hover:text-blue-600 transition">Layanan</a>
+                <a href="#artikel" class="text-gray-600 hover:text-blue-600 transition">Artikel</a>
+                <a href="#kontak" class="text-gray-600 hover:text-blue-600 transition">Kontak</a>
+            </nav>
+            <a href="#kontak" class="hidden md:block bg-blue-600 text-white px-5 py-2 rounded-full font-medium hover:bg-blue-700 transition shadow">Mulai Konsultasi</a>
         </div>
-    </nav>
+    </header>
 
-    <!-- CONTAINER UTAMA -->
-    <main class="container mx-auto px-4 py-8 max-w-6xl">
-        
-        <!-- ================= PANEL ADMIN (EDITABLE & UPLOAD) ================= -->
-        <section x-show="isAdmin" class="bg-white border-2 border-amber-500 rounded-xl p-6 mb-10 shadow-lg" x-transition>
-            <div class="flex justify-between items-center border-b pb-3 mb-6">
-                <h2 class="text-xl font-bold text-amber-700"><i class="fas fa-tools mr-2"></i>DASHBOARD ADMIN & SEO</h2>
-                <span class="text-xs text-gray-400">Tips: Tekan Ctrl+Shift+A untuk sembunyikan/buka</span>
-            </div>
-
-            <!-- Pengaturan Global SEO Website -->
-            <div class="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-200">
-                <h3 class="font-bold text-gray-700 mb-3"><i class="fas fa-search-plus mr-1"></i> Pengaturan Global SEO Web</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-600 mb-1">Meta Title Utama</label>
-                        <input type="text" x-model="seo.title" class="w-full border p-2 rounded text-sm focus:ring-1 focus:ring-green-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-600 mb-1">Keywords (Pisahkan dengan koma)</label>
-                        <input type="text" x-model="seo.keywords" class="w-full border p-2 rounded text-sm">
-                    </div>
-                    <div class="md:col-span-2">
-                        <label class="block text-xs font-bold text-gray-600 mb-1">Meta Description</label>
-                        <textarea x-model="seo.description" rows="2" class="w-full border p-2 rounded text-sm"></textarea>
-                    </div>
+    <!-- HERO SECTION (HOME) -->
+    <section id="home" class="bg-gradient-to-r from-blue-900 to-indigo-800 text-white py-24 md:py-32">
+        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="bg-blue-500 text-xs uppercase tracking-wider px-3 py-1 rounded-full font-semibold">Solusi Bisnis Masa Depan</span>
+                <h1 class="text-4xl md:text-5xl font-extrabold mt-4 leading-tight">Bawa Bisnis Anda ke Level Tertinggi Bersama Kami</h1>
+                <p class="mt-6 text-gray-300 text-lg leading-relaxed">Kami membantu para profesional dan korporasi untuk bertransformasi di era digital melalui strategi yang terukur dan eksekusi yang tepat.</p>
+                <div class="mt-8 flex flex-wrap gap-4">
+                    <a href="#layanan" class="bg-white text-blue-950 px-8 py-3 rounded-lg font-bold shadow-lg hover:bg-gray-100 transition">Jelajahi Layanan</a>
+                    <a href="#tentang" class="border border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-950 transition">Tentang Kami</a>
                 </div>
             </div>
+            <div class="flex justify-center">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600" alt="Fasiha Mulia Team Kerja" class="rounded-xl shadow-2xl border-4 border-white/10 max-w-full h-auto">
+            </div>
+        </div>
+    </section>
 
-            <!-- Form Tambah Artikel -->
-            <form @submit.prevent="saveArticle()" class="space-y-4">
-                <h3 class="font-bold text-gray-700"><i class="fas fa-pen-nib mr-1"></i> Tulis Artikel & Upload Gambar</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-600 mb-1">Judul Artikel</label>
-                        <input type="text" x-model="newArticle.title" required class="w-full border p-2 rounded text-sm">
+    <!-- TENTANG KAMI -->
+    <section id="tentang" class="py-20 bg-white">
+        <div class="container mx-auto px-6 text-center max-w-3xl">
+            <h2 class="text-3xl font-bold text-gray-900">Siapa Kami?</h2>
+            <div class="w-16 h-1 bg-blue-600 mx-auto mt-4 mb-6"></div>
+            <p class="text-gray-600 text-lg leading-relaxed">
+                Fasiha Mulia adalah mitra strategis yang bergerak di bidang konsultasi manajemen, pengembangan digital, dan pelatihan profesional. Didukung oleh tim ahli berpengalaman, kami berkomitmen memberikan dampak nyata bagi pertumbuhan ekosistem bisnis Anda.
+            </p>
+        </div>
+    </section>
+
+    <!-- LAYANAN / SERVICES -->
+    <section id="layanan" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-gray-900">Layanan Unggulan</h2>
+                <p class="text-gray-600 mt-2">Solusi menyeluruh yang disesuaikan dengan tantangan unik bisnis Anda.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition border border-gray-100">
+                    <div class="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 text-2xl mb-6">
+                        <i class="fa-solid fa-chart-line"></i>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-600 mb-1">Upload Foto Berita/Artikel</label>
-                        <input type="file" @change="uploadImage($event)" accept="image/*" class="w-full border p-1 rounded text-sm bg-white">
+                    <h3 class="text-xl font-bold mb-3">Konsultasi Bisnis</h3>
+                    <p class="text-gray-600 leading-relaxed">Strategi jitu untuk mengoptimalkan operasional dan meningkatkan profitabilitas perusahaan Anda.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition border border-gray-100">
+                    <div class="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center text-indigo-600 text-2xl mb-6">
+                        <i class="fa-solid fa-laptop-code"></i>
                     </div>
+                    <h3 class="text-xl font-bold mb-3">Transformasi Digital</h3>
+                    <p class="text-gray-600 leading-relaxed">Pengembangan website, sistem aplikasi, dan adopsi teknologi terkini untuk efisiensi kerja.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition border border-gray-100">
+                    <div class="w-14 h-14 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600 text-2xl mb-6">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Digital Marketing</h3>
+                    <p class="text-gray-600 leading-relaxed">Meningkatkan visibilitas brand secara online melalui SEO, SEM, dan manajemen media sosial.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BERITA & ARTIKEL SECTION -->
+    <section id="artikel" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900">Artikel & Berita Terbaru</h2>
+                    <p class="text-gray-600 mt-2">Wawasan mendalam dan tren industri terkini langsung dari para ahli.</p>
+                </div>
+                <a href="#" class="mt-4 md:mt-0 text-blue-600 font-bold flex items-center gap-2 hover:text-blue-700 transition">
+                    Lihat Semua Artikel <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Artikel 1 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-200 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=500" alt="Strategi SEO 2026" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex items-center gap-4 text-xs text-gray-500 mb-3">
+                            <span><i class="fa-regular fa-calendar mr-1"></i> 4 Juli 2026</span>
+                            <span><i class="fa-regular fa-folder mr-1"></i> Digital Marketing</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 hover:text-blue-600 mb-3 transition">
+                            <a href="#">Strategi SEO Terbaik Menghadapi Algoritma Terbaru di Tahun 2026</a>
+                        </h3>
+                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">
+                            Bagaimana cara agar website bisnis Anda tetap berada di halaman pertama Google? Simak panduan optimasi SEO teknis dan konten yang relevan tahun ini.
+                        </p>
+                        <a href="#" class="mt-auto text-blue-600 font-semibold text-sm inline-flex items-center gap-1 hover:underline">
+                            Baca Selengkapnya <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Artikel 2 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-200 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1542744094-2ab25be78b90?q=80&w=500" alt="Tips Bisnis UMKM" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex items-center gap-4 text-xs text-gray-500 mb-3">
+                            <span><i class="fa-regular fa-calendar mr-1"></i> 28 Juni 2026</span>
+                            <span><i class="fa-regular fa-folder mr-1"></i> Manajemen</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 hover:text-blue-600 mb-3 transition">
+                            <a href="#">5 Langkah Transformasi Digital bagi UMKM untuk Go Global</a>
+                        </h3>
+                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">
+                            Langkah konkret bagi pemilik usaha kecil untuk mulai mengadopsi sistem otomasi digital demi memangkas biaya operasional dan memperluas pasar.
+                        </p>
+                        <a href="#" class="mt-auto text-blue-600 font-semibold text-sm inline-flex items-center gap-1 hover:underline">
+                            Baca Selengkapnya <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Artikel 3 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-200 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=500" alt="Pentingnya Branding Pemimpin" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex items-center gap-4 text-xs text-gray-500 mb-3">
+                            <span><i class="fa-regular fa-calendar mr-1"></i> 15 Juni 2026</span>
+                            <span><i class="fa-regular fa-folder mr-1"></i> Personal Branding</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 hover:text-blue-600 mb-3 transition">
+                            <a href="#">Membangun Otoritas dan Kredibilitas Lewat Personal Branding</a>
+                        </h3>
+                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">
+                            Mengapa seorang founder atau CEO membutuhkan personal branding yang kuat? Pelajari cara memposisikan diri Anda sebagai 'thought leader'.
+                        </p>
+                        <a href="#" class="mt-auto text-blue-600 font-semibold text-sm inline-flex items-center gap-1 hover:underline">
+                            Baca Selengkapnya <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- KONTAK / CTA -->
+    <section id="kontak" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6 max-w-4xl bg-white rounded-2xl shadow-xl overflow-hidden grid md:grid-cols-5">
+            <div class="md:col-span-2 bg-blue-900 text-white p-10 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Mari Berdiskusi</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">Punya pertanyaan atau ingin berkolaborasi? Hubungi kami sekarang dan buat perubahan nyata.</p>
+                </div>
+                <div class="mt-8 space-y-4 text-sm text-gray-300">
+                    <p><i class="fa-solid fa-envelope mr-2 text-blue-400"></i> info@fasihamulia.com</p>
+                    <p><i class="fa-solid fa-phone mr-2 text-blue-400"></i> +62 812-3456-7890</p>
+                    <p><i class="fa-solid fa-location-dot mr-2 text-blue-400"></i> Jakarta, Indonesia</p>
+                </div>
+            </div>
+            <form class="md:col-span-3 p-10 space-y-4" action="#" method="POST">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Kirim Pesan</h3>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 uppercase">Nama Lengkap</label>
+                    <input type="text" required class="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500 bg-gray-50 text-sm">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-gray-600 mb-1">Isi Artikel / Berita</label>
-                    <textarea x-model="newArticle.content" rows="6" required class="w-full border p-2 rounded text-sm" placeholder="Tulis berita lengkap di sini..."></textarea>
+                    <label class="block text-xs font-semibold text-gray-600 uppercase">Email</label>
+                    <input type="email" required class="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500 bg-gray-50 text-sm">
                 </div>
-                <button type="submit" class="bg-green-700 hover:bg-green-800 text-white font-bold px-6 py-2 rounded shadow transition">
-                    <i class="fas fa-cloud-upload-alt mr-2"></i>Terbitkan Artikel
-                </button>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 uppercase">Pesan Anda</label>
+                    <textarea rows="4" required class="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500 bg-gray-50 text-sm"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition shadow">Kirim Sekarang</button>
             </form>
-        </section>
-
-        <!-- ================= VIEW 1: HOME PAGE ================= -->
-        <div x-show="currentView === 'home'" x-transition>
-            <!-- Hero Banner -->
-            <div class="bg-gradient-to-r from-green-800 to-emerald-600 rounded-2xl p-8 md:p-12 text-white text-center shadow-md mb-12">
-                <h1 class="text-3xl md:text-5xl font-extrabold mb-4" x-text="seo.title"></h1>
-                <p class="text-base md:text-lg text-green-100 max-w-2xl mx-auto mb-6" x-text="seo.description"></p>
-                <button @click="currentView = 'blog'" class="bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold px-6 py-3 rounded-xl transition shadow">
-                    Baca Berita & Manfaat Umroh <i class="fas fa-arrow-right ml-1"></i>
-                </button>
-            </div>
         </div>
-
-        <!-- ================= VIEW 2: BLOG & ARTIKEL LIST ================= -->
-        <div x-show="currentView === 'blog'" x-transition>
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold text-gray-900">Pusat Informasi & Edukasi Umroh</h2>
-                <p class="text-gray-500 mt-2">Artikel terbaru seputar ibadah haji, umroh, dan tips tanah suci.</p>
-            </div>
-
-            <!-- Grid Artikel -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <template x-for="(article, index) in articles" :key="index">
-                    <article class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col justify-between hover:shadow-md transition">
-                        <div>
-                            <img :src="article.image || 'https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?q=80&w=400'" :alt="article.title" class="w-full h-48 object-cover">
-                            <div class="p-5">
-                                <span class="text-xs text-green-700 font-bold uppercase tracking-wider block mb-2" x-text="article.date"></span>
-                                <h3 class="font-bold text-xl text-gray-950 mb-3 line-clamp-2" x-text="article.title"></h3>
-                                <p class="text-gray-600 text-sm line-clamp-3" x-text="article.content"></p>
-                            </div>
-                        </div>
-                        <div class="p-5 pt-0 flex justify-between items-center">
-                            <button @click="readSingle(article)" class="text-green-700 font-bold text-sm hover:underline">Baca Selengkapnya &rarr;</button>
-                            <button x-show="isAdmin" @click="deleteArticle(index)" class="text-red-500 hover:text-red-700 text-sm"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </article>
-                </template>
-            </div>
-        </div>
-
-        <!-- ================= VIEW 3: SINGLE ARTIKEL VIEW (SEO OPTIMIZED) ================= -->
-        <div x-show="currentView === 'single'" x-transition class="max-w-3xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow-sm border">
-            <button @click="currentView = 'blog'" class="text-sm font-semibold text-gray-500 hover:text-green-700 mb-6 block">
-                <i class="fas fa-chevron-left mr-1"></i> Kembali ke Blog
-            </button>
-            
-            <header class="mb-6">
-                <span class="text-xs text-green-700 font-bold uppercase tracking-wider" x-text="singleArticle.date"></span>
-                <h1 class="text-2xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-4 leading-tight" x-text="singleArticle.title"></h1>
-            </header>
-
-            <img :src="singleArticle.image || 'https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?q=80&w=800'" :alt="singleArticle.title" class="w-full h-auto rounded-xl mb-8 object-cover max-h-[400px]">
-
-            <div class="prose max-w-none text-gray-700 leading-relaxed space-y-4 whitespace-pre-line" x-text="singleArticle.content"></div>
-        </div>
-
-    </main>
+    </section>
 
     <!-- FOOTER -->
-    <footer class="bg-gray-900 text-gray-400 mt-20 py-8 text-center text-xs border-t border-gray-800">
-        &copy; 2026 Al-Mubarak Portal. Manajemen Konten Mandiri Tanpa Database.
+    <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <p class="text-white font-bold text-lg">FASIHA MULIA</p>
+                <p class="text-xs mt-1">&copy; 2026 Fasiha Mulia. Hak Cipta Dilindungi.</p>
+            </div>
+            <div class="flex space-x-6 text-xl">
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
     </footer>
 
-    <!-- LOGIK PROGRAM (ALPINE.JS & LOCALSTORAGE DATA PERSISTENCE) -->
-    <script>
-        function appData() {
-            return {
-                // State Aplikasi
-                currentView: 'home',
-                isAdmin: false,
-                
-                // SEO default
-                seo: {
-                    title: 'Situs Resmi Al-Mubarak Travel Umroh 2026',
-                    description: 'Penyedia layanan umroh dan haji plus resmi kemenag. Dapatkan informasi berita seputar mekkah dan madinah terbaru disini.',
-                    keywords: 'travel umroh, berita islam, panduan haji, umroh 2026',
-                    url: window.location.href
-                },
-
-                // List Artikel bawaan awal (jika localstorage kosong)
-                articles: JSON.parse(localStorage.getItem('my_articles')) || [
-                    {
-                        title: "Tips Persiapan Fisik Sebelum Berangkat Umroh 2026",
-                        content: "Ibadah umroh membutuhkan ketahanan fisik yang prima karena jemaah akan banyak berjalan kaki saat Thawaf dan Sai. Sangat disarankan untuk memulai olahraga ringan seperti jalan kaki 30 menit setiap hari satu bulan sebelum tanggal keberangkatan Anda.",
-                        image: "https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?q=80&w=400",
-                        date: "04 Jul 2026"
-                    }
-                ],
-
-                newArticle: { title: '', content: '', image: '' },
-                singleArticle: {},
-
-                // Fungsi Upload Gambar & Convert ke Base64 String
-                uploadImage(event) {
-                    const file = event.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = (e) => {
-                            this.newArticle.image = e.target.result;
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                },
-
-                // Simpan Artikel Baru ke LocalStorage browser
-                saveArticle() {
-                    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-                    const today  = new Date();
-                    
-                    const articleData = {
-                        title: this.newArticle.title,
-                        content: this.newArticle.content,
-                        image: this.newArticle.image,
-                        date: today.toLocaleDateString("id-ID", options)
-                    };
-
-                    this.articles.unshift(articleData);
-                    localStorage.setItem('my_articles', JSON.stringify(this.articles));
-                    
-                    // Reset Form
-                    this.newArticle = { title: '', content: '', image: '' };
-                    alert('Artikel berhasil diterbitkan secara lokal!');
-                    this.currentView = 'blog';
-                },
-
-                // Menghapus artikel
-                deleteArticle(index) {
-                    if(confirm("Hapus artikel ini?")) {
-                        this.articles.splice(index, 1);
-                        localStorage.setItem('my_articles', JSON.stringify(this.articles));
-                    }
-                },
-
-                // Membaca artikel tunggal dan inject data SEO khusus artikel tersebut
-                readSingle(article) {
-                    this.singleArticle = article;
-                    this.currentView = 'single';
-                    
-                    // Dinamis SEO saat artikel dibuka (Sangat ramah Google bot)
-                    this.seo.title = article.title + " | Al-Mubarak Blog";
-                    this.seo.description = article.content.substring(0, 160) + "...";
-                },
-
-                // Shortcut keyboard rahasia untuk membuka menu Admin
-                handleShortcut(e) {
-                    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
-                        e.preventDefault();
-                        this.isAdmin = !this.isAdmin;
-                    }
-                }
-            }
-        }
-    </script>
 </body>
 </html>
